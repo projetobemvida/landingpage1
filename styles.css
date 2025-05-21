@@ -92,8 +92,14 @@ header .container {
 }
 
 .logo img {
-    height: 50px;
+    height: 150px; /* Aumentado de 50px para 70px */
     width: auto;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2)); /* Adicionado sombra suave */
+    transition: var(--transition);
+}
+
+.logo img:hover {
+    transform: scale(1.05); /* Efeito sutil de aumento ao passar o mouse */
 }
 
 nav ul {
@@ -136,13 +142,13 @@ nav ul li a:hover:after {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(10, 59, 108, 0.8), rgba(10, 59, 108, 0.8)), url('images/hero-bg.jpeg');
+    background: linear-gradient(rgba(10, 59, 108, 0.8), rgba(10, 59, 108, 0.8)), url('images/hero-bg-generic.png');
     background-size: cover;
     background-position: center;
     color: white;
     text-align: center;
     padding: 10rem 0 5rem;
-    margin-top: 70px;
+    margin-top: 90px; /* Ajustado para o novo tamanho do header */
 }
 
 .hero h1 {
@@ -416,8 +422,9 @@ footer {
 }
 
 .footer-logo img {
-    height: 60px;
+    height: 90px; /* Aumentado de 60px para 90px */
     width: auto;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)); /* Sombra mais pronunciada no footer */
 }
 
 .footer-info {
@@ -461,10 +468,10 @@ footer {
     
     nav ul {
         position: fixed;
-        top: 70px;
+        top: 90px; /* Ajustado para o novo tamanho do header */
         left: -100%;
         width: 100%;
-        height: calc(100vh - 70px);
+        height: calc(100vh - 90px);
         background-color: var(--primary-color);
         flex-direction: column;
         align-items: center;
@@ -546,6 +553,18 @@ footer {
     color: var(--primary-color);
 }
 
+.about-image {
+    flex: 0 0 300px;
+    margin: 0 auto;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 5px solid white;
+}
+
 .about-stats {
     flex: 1;
     min-width: 300px;
@@ -553,6 +572,7 @@ footer {
     flex-wrap: wrap;
     justify-content: space-around;
     gap: 1.5rem;
+    margin-top: 2rem;
 }
 
 .stat-item {
@@ -561,7 +581,7 @@ footer {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    width: 150px;
+    width: 180px;
     transition: var(--transition);
 }
 

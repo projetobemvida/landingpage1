@@ -1,4 +1,4 @@
-// Script para funcionalidade do menu mobile, interatividade da galeria e vídeos do Instagram
+// Script para funcionalidade do menu mobile, interatividade da galeria e vídeos do YouTube
 
 document.addEventListener('DOMContentLoaded', function() {
     // Menu mobile toggle
@@ -146,27 +146,37 @@ document.addEventListener('DOMContentLoaded', function() {
     
     whatsappBtn.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     
-    // Funcionalidade para os vídeos do Instagram
+    // Funcionalidade para os vídeos do YouTube
     const videoThumbnails = document.querySelectorAll('.video-thumbnail');
     const videoModal = document.getElementById('video-modal');
     const videoFrame = document.getElementById('video-frame');
     const closeModal = document.querySelector('.close-modal');
     
-    // Função para extrair o ID do vídeo do Instagram
-    function getInstagramEmbedUrl(instagramUrl) {
-        // Extrair o ID do vídeo da URL do Instagram
-        const urlParts = instagramUrl.split('/');
-        const videoId = urlParts[urlParts.length - 2];
+    // Função para extrair o ID do vídeo do YouTube e criar URL de incorporação
+    function getYouTubeEmbedUrl(youtubeUrl) {
+        // Extrair o ID do vídeo da URL do YouTube
+        let videoId = '';
+        
+        // Formato para shorts: https://youtube.com/shorts/VIDEO_ID?si=PARAMETER
+        if (youtubeUrl.includes('youtube.com/shorts/')) {
+            const urlParts = youtubeUrl.split('shorts/');
+            videoId = urlParts[1].split('?')[0];
+        } 
+        // Formato para vídeos normais: https://youtube.com/watch?v=VIDEO_ID
+        else if (youtubeUrl.includes('youtube.com/watch')) {
+            const urlParams = new URLSearchParams(new URL(youtubeUrl).search);
+            videoId = urlParams.get('v');
+        }
         
         // Criar URL de incorporação
-        return `https://www.instagram.com/p/${videoId}/embed/`;
+        return `https://www.youtube.com/embed/${videoId}`;
     }
     
     // Adicionar evento de clique para cada thumbnail
     videoThumbnails.forEach(thumbnail => {
         thumbnail.addEventListener('click', function() {
             const videoUrl = this.getAttribute('data-video');
-            const embedUrl = getInstagramEmbedUrl(videoUrl);
+            const embedUrl = getYouTubeEmbedUrl(videoUrl);
             
             // Definir a URL do iframe
             videoFrame.src = embedUrl;
